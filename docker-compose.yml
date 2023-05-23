@@ -1,0 +1,11 @@
+django-service:
+    build:
+        context: ./weather
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - "8080:8000"
+    volumes:
+        - ./weather:/app
+    environment:
+        DATABASE_URL: postgresql://user-name:password@postgres/db-name
+        WAIT_HOSTS: postgres:5432
