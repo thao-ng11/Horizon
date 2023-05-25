@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What's the weather like?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <style>
+        .custom-dropdown {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-dropdown .control {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .custom-container {
+            height: 50px; /* Adjust the height as per your requirement */
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    What's the weather like?
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section is-small">
+        <div class="container custom-container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="field has-addons ">
+                    <div class="dropdown is-active is-large custom-dropdown">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                            <span> {{ condition_form.selector }} </span>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <input type="submit" class="button is-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <section class="section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-full is-offset-1">
+                            {% for weather in weather_data %}
+                                {% if weather.condition == condition_form.cleaned_data.selector %}
+                                    <div class="box">
+                                        <article class="media">
+                                        </article>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-three-quarters">
+                    {% for weather in weather_data %}
+                        <div class="box">
+                            <article class="media">
+                                <div class="media-left">
+                                    <figure class="image is-50x50">
+                                        <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <span class="title">{{ weather.city }}, {{ weather.state }}</span>
+                                            <br>
+                                            <span class="subtitle">Temperature:{{ weather.temperature }}°F     Wind Speed:{{ weather.wind }}mph     Description:{{ weather.condition }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What's the weather like?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    What's the weather like?
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container ">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field is-grouped is-grouped-centered">
+                        <div class="dropdown is-active is-large">
+                            <div class="control is-expanded ">
+                               <span> {{ condition_form.selector }} </span>
+                               <br>
+                            </div>
+                            <div class="control">
+                                <input type="submit" class="button is-info" />
+                            </div>
+                        </div>
+                    </form>
+                    <section class="section">
+                        <div class="container">
+                            <div class="columns">
+                                <div class="column is-full is-offset-1">
+                                    {% for weather in weather_data %}
+                                        {% if weather.condition == condition_form.cleaned_data.selector %}
+                                            <div class="box">
+                                                <article class="media">
+                                                </article>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    {% for weather in weather_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{ weather.city }}, {{ weather.state }}</span>
+                                        <br>
+                                        <span class="subtitle">Temperature:{{ weather.temperature }}°F     Wind Speed:{{ weather.wind }}mph     Description:{{ weather.condition }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> -->

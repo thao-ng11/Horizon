@@ -1,0 +1,9 @@
+# Ignore .env file
+.env
+
+# Ignore creds.json 
+/weather/creds.json
+
+# Ignore other sensitive files and directories
+secret/
+private_key.pem

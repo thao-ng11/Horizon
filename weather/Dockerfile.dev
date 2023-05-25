@@ -6,3 +6,9 @@ RUN chmod +x /wait
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 CMD /wait && python manage.py migrate && python manage.py runserver "0.0.0.0:8000"
+
+# # django-crontab logfile
+# RUN mkdir /cron
+# RUN touch /cron/django_cron.log
+# EXPOSE 8000
+# CMD service cron start && python manage.py runserver 0.0.0.0:8000
