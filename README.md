@@ -19,7 +19,7 @@ A Django-based web application that displays weather information for cities.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/thao-ng11/Horizon/weather-app.git
+   git clone https://github.com/thao-ng11/Horizon/tree/main
    cd weather-app
  
 2. Create a virtual environment (optional but recommended):
